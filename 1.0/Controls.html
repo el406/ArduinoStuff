@@ -1,0 +1,66 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title> ARDUINO DRONE GUI TEST </title>
+    <link rel="stylesheet" href = "format.css">
+</head>
+
+<body> 
+    <!-- creation of the GUI  -->   
+    <h1> Heres the gui yipeeee. </h1>
+    <p>motor 1</p>
+    <input type="range" min="0" max="100" value="50" class="slider" id="ESC1">
+    <button onclick = setMotor(1)> set motor 1 </button>
+    <p>motor 2</p>
+    <input type="range" min="0" max="100" value="50" class="slider" id="ESC2">
+    <button onclick = setMotor(2)> set motor 2 </button> 
+    <p>motor 3</p>
+    <input type="range" min="0" max="100" value="50" class="slider" id="ESC3">
+    <button onclick = setMotor(3)> set motor 3 </button>
+    <p>motor 4</p>
+    <input type="range" min="0" max="100" value="50" class="slider" id="ESC4">
+    <button onclick = setMotor(4)> set motor 4 </button>
+    <p>MASTER TUNER</p>
+    <input type="number" min="0" max = "100" value="50" id = "MASTER">
+    <button onclick=masterSet()> set all motors</button>
+    <p></p>
+    <button onclick=ESTOP()> EMERGENCY STOP </button>
+
+
+    <!-- Shitty js scripts -->   
+    <!-- io init  -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    var socket = io();
+    
+
+        function ESTOP()
+        {
+            document.getElementById("MASTER").value = "0"
+            masterSet();
+        }
+        function masterSet()
+        {
+            var value = document.getElementById("MASTER").value;
+            socket.emit('MASTER motor', value);
+            
+        }
+
+        function setMotor(ID) 
+        {
+            var value = document.getElementById("ESC"+ID).value;
+
+            socket.emit('change motor ' + ID, value);
+            return;
+        }
+
+
+    </script>
+     
+    
+    
+    
+   
+
+</body>
+</html>

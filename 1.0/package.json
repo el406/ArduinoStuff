@@ -1,0 +1,11 @@
+{
+    "name": "Arduino-gui",
+    "version": "0.0.1",
+    "description": "Using a server to send serial data to Arduino",
+    "dependencies": {
+        "Arduino-gui": "file:",
+        "express": "^4.19.2",
+        "serialport": "^9.0.1",
+        "socket.io": "^4.7.5"
+    }
+}
